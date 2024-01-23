@@ -1,0 +1,12 @@
+body{
+    background-color: whitesmoke;
+}
+.container{
+   margin: 50px auto;
+
+}
+.submit{
+    border-radius: 30px;
+    margin-left: 276px;
+    margin-top: 10px;
+}
