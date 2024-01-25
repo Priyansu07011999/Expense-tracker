@@ -1,23 +1,26 @@
 function submit_form() {
-    const name = document.getElementById('expenseName').value;
-    const amount = document.getElementById('expenseAmount').value;
-    const index = document.getElementById('expenseIndex').value;
-    const category = document.getElementsByClassName('category').value;
-
-    if (name && amount) {
-      const expense = {name, amount, category};
-      let expenses = JSON.parse(localStorage.getItem('expenses'));
-
-      if (index !== "") {expenses[index] = expense;}   
-      else {expenses.push(expense);}
-      
-
-      localStorage.setItem('expenses', JSON.stringify(expenses)); // set the item in local storage
-
-      // Clear all after submit
-      document.getElementById('expenseName').value = '';
-      document.getElementById('expenseAmount').value = '';
-      document.getElementById('expenseIndex').value = '';
+      const name = document.getElementById('expenseName').value;
+      const amount = document.getElementById('expenseAmount').value;
+      const index = document.getElementById('expenseIndex').value;
+    
+      if (name && amount) {
+        const expense = { name, amount };
+        let expenses = JSON.parse(localStorage.getItem('expenses')) || [];
+    
+        if (index !== "") {
+          // Update existing expense
+          expenses[index] = expense;
+        } else {
+          // Add new expense
+          expenses.push(expense);
+        }
+    
+        localStorage.setItem('expenses', JSON.stringify(expenses));
+    
+        // Clear form fields and index
+        document.getElementById('expenseName').value = '';
+        document.getElementById('expenseAmount').value = '';
+        document.getElementById('expenseIndex').value = '';
 
       updateList();
     }
